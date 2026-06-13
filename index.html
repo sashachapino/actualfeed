@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';
+             style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+             font-src https://fonts.gstatic.com;
+             script-src 'self';
+             img-src 'self' data: https:">
+  <title>ActualFeed</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Left sidebar: navigation -->
+    <aside id="sidebar">
+      <div id="sidebar-header">
+        <div id="drag-region"></div>
+        <h1 id="app-title">ActualFeed</h1>
+        <p id="app-subtitle">The week worth reading</p>
+      </div>
+
+      <nav id="nav-top">
+        <div class="nav-item active" data-source="unread">
+          <span class="nav-icon">◉</span>
+          <span class="nav-label">All Unread</span>
+          <span class="nav-count" id="unread-total"></span>
+        </div>
+        <div class="nav-item" data-source="smart-feed">
+          <span class="nav-icon">✦</span>
+          <span class="nav-label">Smart Feed</span>
+        </div>
+      </nav>
+
+      <div class="nav-section-label">Thinkers</div>
+
+      <div id="source-list">
+        <!-- populated by renderer -->
+      </div>
+
+      <div id="sidebar-footer">
+        <button id="refresh-btn" title="Refresh all feeds">↻ Refresh</button>
+        <button id="settings-btn" title="Settings">⚙ Settings</button>
+      </div>
+    </aside>
+
+    <!-- Middle column: article list -->
+    <section id="article-pane">
+      <div id="article-pane-header">
+        <h2 id="pane-title">All Unread</h2>
+        <button id="mark-all-btn" class="subtle-btn" style="display:none">Mark all read</button>
+      </div>
+      <div id="article-list">
+        <div class="pane-empty">Loading…</div>
+      </div>
+    </section>
+
+    <!-- Right column: reader -->
+    <main id="reader-pane">
+
+      <!-- Default empty state -->
+      <div id="reader-empty">
+        <div class="empty-splash">
+          <div class="empty-logo">AF</div>
+          <p>Select an article<br>to begin reading.</p>
+        </div>
+      </div>
+
+      <!-- Article reader -->
+      <div id="reader-article" style="display:none">
+        <div id="reader-meta">
+          <span id="reader-source"></span>
+          <span id="reader-sep">·</span>
+          <span id="reader-date"></span>
+        </div>
+        <h1 id="reader-title"></h1>
+        <div id="reader-body"></div>
+        <div id="reader-actions">
+          <button id="open-btn">Open in Browser ↗</button>
+          <button id="read-btn">Mark as Read</button>
+        </div>
+      </div>
+
+      <!-- Smart Feed view -->
+      <div id="reader-smart" style="display:none">
+        <div id="smart-header">
+          <div id="smart-eyebrow">Smart People Are Thinking</div>
+          <div id="smart-date"></div>
+        </div>
+        <div id="smart-body"></div>
+        <div id="smart-actions">
+          <button id="regen-btn">↺ Regenerate</button>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- Settings modal -->
+  <div id="settings-overlay" class="overlay" style="display:none">
+    <div class="modal">
+      <div class="modal-header">
+        <h2>Settings</h2>
+        <button id="close-modal-btn" class="modal-close">✕</button>
+      </div>
+
+      <div class="setting-section">
+        <div class="setting-label">Smart Feed — Anthropic API Key</div>
+        <input type="password" id="s-api-key" placeholder="sk-ant-api03-…" class="setting-input">
+        <div class="setting-hint">Used to generate the weekly Bilahari-voice synthesis. Get one at console.anthropic.com.</div>
+      </div>
+
+      <div class="setting-section">
+        <div class="setting-label">Weekly Email — SMTP</div>
+        <div class="setting-row">
+          <input type="text" id="s-smtp-host" placeholder="smtp.gmail.com" class="setting-input" style="flex:2">
+          <input type="number" id="s-smtp-port" placeholder="587" class="setting-input" style="flex:1">
+        </div>
+        <input type="text" id="s-smtp-user" placeholder="you@gmail.com" class="setting-input">
+        <input type="password" id="s-smtp-pass" placeholder="App password (not your Google password)" class="setting-input">
+        <div class="setting-hint">For Gmail: enable 2FA, then create an App Password at myaccount.google.com/apppasswords.</div>
+      </div>
+
+      <div class="modal-actions">
+        <button id="save-settings-btn" class="primary-btn">Save</button>
+        <button id="test-email-btn" class="subtle-btn">Send Test Email</button>
+        <button id="cancel-settings-btn" class="subtle-btn">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status toast -->
+  <div id="toast" style="display:none"></div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
