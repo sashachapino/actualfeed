@@ -5,49 +5,31 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "rebuild": "node_modules/.bin/electron-rebuild -f -w better-sqlite3",
     "build": "electron-builder",
     "build:mac": "electron-builder --mac",
     "build:win": "electron-builder --win",
-    "build:linux": "electron-builder --linux",
-    "postinstall": "node_modules/.bin/electron-rebuild -f -w better-sqlite3"
+    "build:linux": "electron-builder --linux"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.36.0",
-    "better-sqlite3": "^9.4.3",
     "nodemailer": "^6.9.10",
     "node-cron": "^3.0.3",
     "rss-parser": "^3.13.0"
   },
   "devDependencies": {
-    "@electron/rebuild": "^3.6.0",
     "electron": "^29.1.4",
     "electron-builder": "^24.12.0"
   },
   "build": {
     "appId": "com.actualfeed.app",
     "productName": "ActualFeed",
-    "directories": {
-      "output": "dist"
-    },
+    "directories": { "output": "dist" },
     "files": [
-      "main.js",
-      "preload.js",
-      "index.html",
-      "renderer.js",
-      "styles.css",
-      "backend/**/*",
-      "node_modules/**/*"
+      "main.js", "preload.js", "index.html", "renderer.js", "styles.css",
+      "backend/**/*", "node_modules/**/*"
     ],
-    "mac": {
-      "category": "public.app-category.news",
-      "target": [{ "target": "dmg" }]
-    },
-    "win": {
-      "target": [{ "target": "nsis" }]
-    },
-    "linux": {
-      "target": [{ "target": "AppImage" }]
-    }
+    "mac":   { "category": "public.app-category.news", "target": [{ "target": "dmg" }] },
+    "win":   { "target": [{ "target": "nsis" }] },
+    "linux": { "target": [{ "target": "AppImage" }] }
   }
 }
