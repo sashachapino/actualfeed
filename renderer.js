@@ -1,4 +1,5 @@
 /* ActualFeed renderer — runs in Electron BrowserWindow */
+(function () {
 const { api } = window;
 
 // ── State ──────────────────────────────────────────────────────────
@@ -363,3 +364,5 @@ document.getElementById('settings-overlay').addEventListener('click', e => {
 
 // ── Start ──────────────────────────────────────────────────────────
 init();
+
+})();
