@@ -104,6 +104,7 @@ function renderArticleList() {
   list.innerHTML = visibleArticles.map(a => `
     <div class="article-item ${a.is_read ? 'read' : 'unread'} ${currentArticle?.id === a.id ? 'active' : ''}"
          data-id="${a.id}">
+      ${!a.is_read ? `<button class="quick-read-btn" data-id="${a.id}" title="Mark as read">✓</button>` : ''}
       <div class="article-title">${esc(a.title)}</div>
       <div class="article-meta">
         ${currentSource === 'unread' ? `<span class="article-source-tag">${esc(a.source_name)}</span><span>·</span>` : ''}
@@ -115,6 +116,28 @@ function renderArticleList() {
   list.querySelectorAll('.article-item').forEach(el =>
     el.addEventListener('click', () => openArticle(parseInt(el.dataset.id)))
   );
+
+  list.querySelectorAll('.quick-read-btn').forEach(btn =>
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      quickMarkRead(parseInt(btn.dataset.id));
+    })
+  );
+}
+
+async function quickMarkRead(id) {
+  const article = visibleArticles.find(a => a.id === id);
+  if (!article || article.is_read) return;
+  await api.markAsRead(id);
+  article.is_read = true;
+  if (currentArticle?.id === id) {
+    currentArticle.is_read = true;
+    const readBtn = document.getElementById('read-btn');
+    readBtn.textContent = '✓ Read';
+    readBtn.disabled = true;
+  }
+  renderArticleList();
+  await refreshCounts();
 }
 
 // ── Article reader ─────────────────────────────────────────────────
