@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Coaching Reminder — Settings</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>Coaching Reminder</h1>
+  <p class="sub">Watches for finished Zoom calls and emails you to log notes + hours.</p>
+
+  <section>
+    <h2>Email (SMTP)</h2>
+    <label>SMTP host <input id="smtpHost" placeholder="smtp.gmail.com"></label>
+    <label>SMTP port <input id="smtpPort" type="number" placeholder="587"></label>
+    <label>SMTP username / email <input id="smtpUser" placeholder="you@gmail.com"></label>
+    <label>SMTP password <input id="smtpPass" type="password" placeholder="(leave blank to keep current)"></label>
+    <p class="hint">Stored in your macOS Keychain, not in a plaintext file. For Gmail, use an App Password.</p>
+    <label>Send reminders to <input id="reminderTo" placeholder="you@gmail.com"></label>
+    <label>From name <input id="fromName" placeholder="Coaching Reminder"></label>
+    <button id="testEmail">Send test email</button>
+    <span id="testResult" class="hint"></span>
+  </section>
+
+  <section>
+    <h2>Detection</h2>
+    <label>Zoom process name pattern
+      <input id="zoomProcessPattern" placeholder="CptHost">
+    </label>
+    <p class="hint">Comma-separated substrings matched (case-insensitive) against running process names to detect an active Zoom call. Adjust if Zoom updates change this.</p>
+    <label>Check every (seconds) <input id="pollSeconds" type="number"></label>
+    <label>Ignore calls shorter than (minutes) <input id="minCallMinutes" type="number"></label>
+    <label>Calendar match buffer (minutes) <input id="matchBufferMins" type="number"></label>
+  </section>
+
+  <section>
+    <label class="checkbox"><input id="enabled" type="checkbox"> Monitoring enabled</label>
+    <label class="checkbox"><input id="launchAtLogin" type="checkbox"> Launch at login</label>
+  </section>
+
+  <button id="save" class="primary">Save</button>
+  <span id="saveResult" class="hint"></span>
+
+  <section>
+    <h2>Recent activity</h2>
+    <ul id="activity" class="activity"></ul>
+  </section>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

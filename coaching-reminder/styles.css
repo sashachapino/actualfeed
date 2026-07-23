@@ -1,0 +1,63 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f5f7;
+  color: #1d1d1f;
+  padding: 20px 24px 32px;
+  margin: 0;
+}
+
+h1 { font-size: 18px; margin: 0 0 4px; }
+h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; color: #6e6e73; margin: 0 0 10px; }
+.sub { font-size: 12px; color: #6e6e73; margin: 0 0 20px; }
+
+section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+label.checkbox { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+label.checkbox input { margin: 0; }
+
+input[type="text"], input[type="password"], input[type="number"], input:not([type]) {
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 4px;
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #d2d2d7;
+  border-radius: 6px;
+}
+
+.hint { display: block; font-size: 11px; color: #86868b; margin: -4px 0 10px; }
+
+button {
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid #d2d2d7;
+  background: #fff;
+  cursor: pointer;
+}
+
+button.primary {
+  background: #0a84ff;
+  border-color: #0a84ff;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+ul.activity { list-style: none; margin: 0; padding: 0; max-height: 220px; overflow-y: auto; }
+ul.activity li { font-size: 12px; padding: 6px 0; border-bottom: 1px solid #eee; }
+ul.activity li.warn { color: #c0392b; }
+ul.activity li.empty { color: #86868b; }

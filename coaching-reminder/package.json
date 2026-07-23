@@ -1,0 +1,33 @@
+{
+  "name": "coaching-reminder",
+  "version": "1.0.0",
+  "description": "Menu-bar reminder that watches for finished Zoom calls and emails you to log notes and hours",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:mac": "electron-builder --mac"
+  },
+  "dependencies": {
+    "nodemailer": "^6.9.10"
+  },
+  "devDependencies": {
+    "electron": "^29.1.4",
+    "electron-builder": "^24.12.0"
+  },
+  "build": {
+    "appId": "com.actualfeed.coachingreminder",
+    "productName": "Coaching Reminder",
+    "directories": { "output": "dist" },
+    "files": [
+      "main.js", "preload.js", "index.html", "renderer.js", "styles.css",
+      "lib/**/*", "assets/**/*", "node_modules/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": [{ "target": "dmg" }],
+      "icon": "assets/icon.png",
+      "extendInfo": { "LSUIElement": true }
+    }
+  }
+}
